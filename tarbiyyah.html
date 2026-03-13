@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarbiyyah – BSMS ISOC</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-pale: #F5EDD0;
+    --green-deep: #1A3A2A;
+    --green-mid: #2D5A3D;
+    --green-light: #3D7A52;
+    --cream: #F5F0E8;
+    --cream-dark: #EAE3D2;
+    --text-dark: #1A1A1A;
+    --text-mid: #4A4A4A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { overflow-x: hidden; width: 100%; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+  }
+
+  /* ── Section nav tabs ── */
+  .tab-nav {
+    display: flex;
+    gap: 0;
+    background: var(--green-deep);
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: relative;
+    z-index: 10;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 16px 12px;
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.55);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--gold-light); }
+  .tab-btn.active {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── Sections ── */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── Section header ── */
+  .section-header {
+    background: var(--green-deep);
+    padding: 48px 24px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .section-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z' fill='none' stroke='%23C9A84C' stroke-width='1'/%3E%3C/svg%3E");
+  }
+  .section-header h2 {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--gold-light);
+    position: relative;
+  }
+  .section-header p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    margin-top: 8px;
+    position: relative;
+  }
+  .arabic-header {
+    font-family: 'Amiri', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    direction: rtl;
+    margin-bottom: 6px;
+    position: relative;
+  }
+
+  /* ── DUAS SECTION ── */
+  .duas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    padding: 32px 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .dua-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    border-left: 4px solid var(--gold);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    position: relative;
+  }
+  .dua-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  }
+  .dua-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 10px;
+  }
+  .dua-arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.4rem;
+    line-height: 2;
+    direction: rtl;
+    text-align: right;
+    color: var(--green-deep);
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+  .dua-transliteration {
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--text-mid);
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+  .dua-translation {
+    font-size: 0.88rem;
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+  .dua-source {
+    margin-top: 10px;
+    font-size: 0.72rem;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--cream);
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 0.72rem;
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .copy-btn:hover { background: var(--cream-dark); color: var(--green-deep); }
+  .copy-btn.copied { background: var(--green-light); color: white; }
+
+  /* ── MOSQUES SECTION ── */
+  .mosques-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 0;
+    max-width: 100%;
+  }
+  @media (max-width: 768px) {
+    .mosques-layout { grid-template-columns: 1fr; }
+  }
+  #mosque-map {
+    height: 480px;
+    background: var(--cream-dark);
+  }
+  .mosque-list {
+    background: white;
+    overflow-y: auto;
+    max-height: 480px;
+  }
+  .mosque-item {
+    padding: 20px;
+    border-bottom: 1px solid var(--cream-dark);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .mosque-item:hover { background: var(--cream); }
+  .mosque-item.active { background: var(--gold-pale); border-left: 3px solid var(--gold); }
+  .mosque-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--green-deep);
+    margin-bottom: 4px;
+  }
+  .mosque-addr {
+    font-size: 0.8rem;
+    color: var(--text-mid);
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .mosque-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .mosque-tag {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: var(--cream-dark);
+    color: var(--text-mid);
+  }
+  .mosque-tag.jummah { background: #E8F5E9; color: #2E7D32; }
+  .mosque-tag.sisters { background: #FCE4EC; color: #C2185B; }
+  .mosque-tag.wudu { background: #E3F2FD; color: #1565C0; }
+  .mosque-dir-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+    font-size: 0.75rem;
+    color: var(--green-light);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .mosque-dir-btn:hover { color: var(--gold); }
+
+  /* ── RESOURCES SECTION ── */
+  .resources-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+  .resource-intro {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .resource-intro .hadith {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--green-mid);
+    line-height: 1.8;
+    margin-bottom: 6px;
+  }
+  .resource-intro .hadith-source {
+    font-size: 0.8rem;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .resource-section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 32px 0 16px;
+  }
+  .resource-section-title h3 {
+    font-family: 'Amiri', serif;
+    font-size: 1.4rem;
+    color: var(--green-deep);
+  }
+  .resource-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--cream-dark);
+  }
+
+  .resource-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .resource-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-top: 3px solid var(--green-light);
+  }
+  .resource-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.09);
+  }
+  .rc-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--green-deep);
+    margin-bottom: 6px;
+  }
+  .rc-info {
+    font-size: 0.8rem;
+    color: var(--text-mid);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .rc-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .rc-tag {
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: var(--cream-dark);
+    color: var(--text-mid);
+  }
+  .rc-tag.online { background: #E8F5E9; color: #2E7D32; }
+  .rc-tag.inperson { background: #FFF8E1; color: #F57F17; }
+  .rc-tag.free { background: #E3F2FD; color: #1565C0; }
+  .rc-tag.sisters { background: #FCE4EC; color: #C2185B; }
+  .rc-time {
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .rc-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background: var(--green-deep);
+    color: white;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .rc-btn:hover { background: var(--green-light); }
+  .rc-btn.secondary {
+    background: transparent;
+    color: var(--green-mid);
+    border: 1px solid var(--green-mid);
+    margin-left: 6px;
+  }
+  .rc-btn.secondary:hover { background: var(--cream-dark); }
+
+  /* Onsite course table */
+  .onsite-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .onsite-table th {
+    background: var(--green-deep);
+    color: var(--gold-light);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .onsite-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--cream-dark);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .onsite-table tr:last-child td { border-bottom: none; }
+  .onsite-table tr:hover td { background: var(--cream); }
+  .onsite-table .signup-link {
+    display: inline-block;
+    padding: 6px 12px;
+    background: var(--green-deep);
+    color: white;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .onsite-table .signup-link:hover { background: var(--green-light); }
+  .no-signup {
+    font-size: 0.78rem;
+    color: var(--green-light);
+    font-style: italic;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .section.active { animation: fadeIn 0.3s ease; }
+
+  @media (max-width: 600px) {
+    /* ── Tabs ── */
+    .tab-nav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      overflow-x: visible;
+    }
+    .tab-btn {
+      min-width: 0;
+      padding: 10px 4px;
+      font-size: 0.62rem;
+      white-space: normal;
+      text-align: center;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    /* ── Headers ── */
+    .section-header { padding: 24px 16px 20px; }
+    .section-header h2 { font-size: 1.5rem; }
+    .arabic-header { font-size: 1.1rem; }
+
+    /* ── Duas ── */
+    .duas-grid {
+      grid-template-columns: 1fr;
+      padding: 20px 14px;
+      gap: 14px;
+    }
+    .dua-arabic { font-size: 1.2rem; line-height: 1.8; }
+    .dua-transliteration { font-size: 0.78rem; }
+    .dua-translation { font-size: 0.83rem; }
+
+    /* ── Mosques ── */
+    .mosques-layout { grid-template-columns: 1fr; }
+    #mosque-map { height: 260px; }
+    .mosque-list { max-height: 320px; }
+    .mosque-item { padding: 14px; }
+    .mosque-name { font-size: 0.88rem; }
+    .mosque-addr { font-size: 0.75rem; }
+
+    /* ── Resources ── */
+    .resources-wrap { padding: 20px 14px; }
+    .resource-intro .hadith { font-size: 0.95rem; }
+    .resource-cards {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .onsite-table { font-size: 0.75rem; }
+    .onsite-table th { padding: 10px 8px; font-size: 0.68rem; }
+    .onsite-table td { padding: 10px 8px; }
+    .rc-title { font-size: 0.88rem; }
+    .rc-info { font-size: 0.75rem; }
+    .rc-btn { font-size: 0.72rem; padding: 7px 12px; }
+  }
+</style>
+<script>
+// ── Sheet URLs ──
+const DUAS_URL      = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS8vwXhuQepK8fSFb_cgYhxmsDSv0ITMppgpJ3ch5vHK_JnUmRAMhp5y8Tb362CTvpkoGCMM9iLunS_/pub?gid=0&single=true&output=csv';
+const MOSQUES_URL   = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS8vwXhuQepK8fSFb_cgYhxmsDSv0ITMppgpJ3ch5vHK_JnUmRAMhp5y8Tb362CTvpkoGCMM9iLunS_/pub?gid=1450864336&single=true&output=csv';
+const RESOURCES_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS8vwXhuQepK8fSFb_cgYhxmsDSv0ITMppgpJ3ch5vHK_JnUmRAMhp5y8Tb362CTvpkoGCMM9iLunS_/pub?gid=1177767246&single=true&output=csv';
+const MAPS_KEY      = 'AIzaSyD8FeVqoHzJBsLiFkoB4gypG2O7yS07Tjo';
+
+// ── CSV parser ──
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+  return lines.slice(1).map(line => {
+    const vals = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') { inQ = !inQ; }
+      else if (ch === ',' && !inQ) { vals.push(cur.trim()); cur = ''; }
+      else { cur += ch; }
+    }
+    vals.push(cur.trim());
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = (vals[i] || '').replace(/^"|"$/g, ''));
+    return obj;
+  }).filter(r => Object.values(r).some(v => v));
+}
+
+// ── Tab switching ──
+function showTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelector('[data-tab="' + tabId + '"]').classList.add('active');
+  document.getElementById('tab-' + tabId).classList.add('active');
+}
+
+// ── Copy dua ──
+function copyDua(btn) {
+  const card = btn.closest('.dua-card');
+  const arabic = card.querySelector('.dua-arabic').textContent.trim();
+  const trans  = card.querySelector('.dua-transliteration').textContent.trim();
+  const meaning = card.querySelector('.dua-translation').textContent.trim();
+  const source = card.querySelector('.dua-source').textContent.trim();
+  navigator.clipboard.writeText(arabic + '\n\n' + trans + '\n\n' + meaning + '\n\n' + source).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ── Mosque map ──
+function showMosque(el) {
+  document.querySelectorAll('.mosque-item').forEach(m => m.classList.remove('active'));
+  el.classList.add('active');
+  const q = encodeURIComponent(el.dataset.q);
+  document.getElementById('mosque-map').src =
+    'https://www.google.com/maps/embed/v1/search?key=' + MAPS_KEY + '&q=' + q + '&zoom=15';
+}
+
+// ── Render duas ──
+async function loadDuas() {
+  try {
+    const res = await fetch(DUAS_URL);
+    const rows = parseCSV(await res.text());
+    const grid = document.getElementById('duas-grid');
+    grid.innerHTML = rows.map(r => `
+      <div class="dua-card">
+        <div class="dua-label">${r.Label || ''}</div>
+        <button class="copy-btn" onclick="copyDua(this)">Copy</button>
+        <div class="dua-arabic">${r.Arabic || ''}</div>
+        <div class="dua-transliteration">${r.Transliteration || ''}</div>
+        <div class="dua-translation">"${r.Translation || ''}"</div>
+        <div class="dua-source">${r.Source || ''}</div>
+      </div>`).join('');
+  } catch(e) {
+    document.getElementById('duas-grid').innerHTML = '<p class="loading-msg">Could not load duas.</p>';
+  }
+}
+
+// ── Render mosques ──
+async function loadMosques() {
+  try {
+    const res = await fetch(MOSQUES_URL);
+    const rows = parseCSV(await res.text());
+    const list = document.getElementById('mosque-list');
+    list.innerHTML = rows.map((r, i) => {
+      const tags = (r.Tags||'').split(',').map(t => t.trim()).filter(Boolean);
+      const tagHTML = tags.map(t => {
+        let cls = '';
+        if (t.toLowerCase().includes('jum')) cls = 'jummah';
+        else if (t.toLowerCase().includes('wudu')) cls = 'wudu';
+        else if (t.toLowerCase().includes('sister')) cls = 'sisters';
+        return `<span class="mosque-tag ${cls}">${t}</span>`;
+      }).join('');
+      return `
+      <div class="mosque-item ${i===0?'active':''}" data-q="${r.MapsQuery||''}" onclick="showMosque(this)">
+        <div class="mosque-name">${r.Name || ''}</div>
+        <div class="mosque-addr">${r.Address || ''}</div>
+        ${tagHTML ? `<div class="mosque-tags">${tagHTML}</div>` : ''}
+        <a class="mosque-dir-btn" href="https://maps.google.com/?q=${encodeURIComponent(r.Address||'')}" target="_blank">↗ Get Directions</a>
+      </div>`;
+    }).join('');
+    // Set initial map to first mosque
+    if (rows.length > 0) {
+      const q = encodeURIComponent(rows[0].MapsQuery || rows[0].Name);
+      document.getElementById('mosque-map').src =
+        'https://www.google.com/maps/embed/v1/search?key=' + MAPS_KEY + '&q=' + q + '&zoom=15';
+    }
+  } catch(e) {
+    document.getElementById('mosque-list').innerHTML = '<p class="loading-msg">Could not load locations.</p>';
+  }
+}
+
+// ── Render resources ──
+async function loadResources() {
+  try {
+    const res = await fetch(RESOURCES_URL);
+    const rows = parseCSV(await res.text());
+    const onsite = rows.filter(r => (r.Type||'').toLowerCase() === 'onsite');
+    const online = rows.filter(r => (r.Type||'').toLowerCase() === 'online');
+
+    // Onsite table
+    const tbody = document.getElementById('onsite-tbody');
+    if (onsite.length === 0) {
+      document.getElementById('onsite-wrap').style.display = 'none';
+    } else {
+      tbody.innerHTML = onsite.map(r => `
+        <tr>
+          <td><strong>${r.Title||''}</strong></td>
+          <td>${r.Description||''}</td>
+          <td>${(r.Tags||'').split(',').map(t => `<span class="rc-tag">${t.trim()}</span>`).join(' ')}</td>
+          <td>${r.Link ? `<a class="signup-link" href="${r.Link}" target="_blank">Sign Up ↗</a>` : '<span class="no-signup">No sign up required</span>'}</td>
+        </tr>`).join('');
+    }
+
+    // Online cards
+    const cardsEl = document.getElementById('online-cards');
+    cardsEl.innerHTML = online.map(r => `
+      <div class="resource-card">
+        <div class="rc-title">${r.Title||''}</div>
+        <div class="rc-info">${r.Description||''}</div>
+        <div class="rc-meta">
+          <span class="rc-tag online">Online</span>
+          ${(r.Tags||'').split(',').map(t => `<span class="rc-tag">${t.trim()}</span>`).join('')}
+        </div>
+        ${r.Link ? `<br><a class="rc-btn" href="${r.Link}" target="_blank">Visit ↗</a>` : ''}
+      </div>`).join('');
+  } catch(e) {
+    document.getElementById('online-cards').innerHTML = '<p class="loading-msg">Could not load resources.</p>';
+  }
+}
+
+// ── Init ──
+loadDuas();
+loadMosques();
+loadResources();
+</script>
+</head>
+<body>
+
+<!-- Tab Navigation -->
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="duas" onclick="showTab('duas')">📿 Duas for Study</button>
+  <button class="tab-btn" data-tab="mosques" onclick="showTab('mosques')">🕌 Mosques & Prayer Rooms</button>
+  <button class="tab-btn" data-tab="resources" onclick="showTab('resources')">📚 Knowledge Resources</button>
+</nav>
+
+<!-- ══════════════ DUAS SECTION ══════════════ -->
+<div class="section active" id="tab-duas">
+  <div class="section-header">
+    <div class="arabic-header">أدعية طلب العلم</div>
+    <h2>Duas for Knowledge & Study</h2>
+    <p>Recite these before studying, during exams, and when seeking guidance</p>
+  </div>
+  <div class="duas-grid" id="duas-grid"><div class="loading-msg">Loading duas...</div></div>
+</div>
+
+<!-- ══════════════ MOSQUES SECTION ══════════════ -->
+<div class="section" id="tab-mosques">
+  <div class="section-header">
+    <div class="arabic-header">المساجد وغرف الصلاة</div>
+    <h2>Mosques & Prayer Rooms in Brighton</h2>
+    <p>Click a location to view it on the map</p>
+  </div>
+  <div class="mosques-layout">
+    <iframe id="mosque-map" src="" style="border:0;width:100%;height:480px;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="mosque-list" id="mosque-list"><div class="loading-msg">Loading locations...</div></div>
+  </div>
+</div>
+
+<!-- ══════════════ RESOURCES SECTION ══════════════ -->
+<div class="section" id="tab-resources">
+  <div class="section-header">
+    <div class="arabic-header">مصادر العلم</div>
+    <h2>Knowledge Resources</h2>
+    <p>Courses and institutes for Islamic learning, online and in Brighton</p>
+  </div>
+  <div class="resources-wrap">
+    <div id="onsite-wrap">
+      <div class="resource-section-title"><h3>🕌 Onsite Courses & Events</h3></div>
+      <div class="table-scroll">
+        <table class="onsite-table">
+          <thead><tr><th>Course</th><th>Description</th><th>Tags</th><th>Link</th></tr></thead>
+          <tbody id="onsite-tbody"><tr><td colspan="4" class="loading-msg">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="resource-section-title"><h3>💻 Online Courses & Institutes</h3></div>
+    <div class="resource-cards" id="online-cards"><div class="loading-msg">Loading resources...</div></div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/iframe-resizer@4.3.9/js/iframeResizer.contentWindow.min.js"></script>
+</body>
+</html>

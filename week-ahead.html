@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week Ahead – BSMS ISOC</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-pale: #FBF5E6;
+    --green-deep: #1A3A2A;
+    --green-mid: #2D5A3D;
+    --green-light: #3D7A52;
+    --cream: #FDFAF4;
+    --cream-dark: #EEE8D8;
+    --text-dark: #1A1A1A;
+    --text-mid: #5A5A5A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; width: 100%; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    padding: 28px 20px 24px;
+  }
+
+  /* ── Header ── */
+  .widget-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .widget-title {
+    font-family: 'Amiri', serif;
+    font-size: 1.6rem;
+    color: var(--green-deep);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .widget-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 1.4rem;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+  .view-all-link {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--green-light);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid var(--cream-dark);
+    padding-bottom: 1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .view-all-link:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* ── Date range label ── */
+  .date-range {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-mid);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  /* ── Cards row ── */
+  .cards-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+  }
+
+  /* ── Event card ── */
+  .event-card {
+    background: white;
+    border-radius: 10px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--cream-dark);
+    position: relative;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    cursor: default;
+  }
+  .event-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(201,168,76,0.12);
+    border-color: var(--gold);
+  }
+
+  /* Gold top stripe by type */
+  .event-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 10px 10px 0 0;
+    background: var(--gold);
+  }
+  .event-card.type-sisters::before   { background: #D4618A; }
+  .event-card.type-brothers::before  { background: var(--green-mid); }
+  .event-card.type-sports::before    { background: #3B6CB7; }
+  .event-card.type-charity::before   { background: #C87420; }
+  .event-card.type-academic::before  { background: #7B4FA6; }
+  .event-card.type-social::before    { background: var(--green-light); }
+
+  .card-day {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin-bottom: 5px;
+  }
+  .card-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--green-deep);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .card-time, .card-location {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.74rem;
+    color: var(--text-mid);
+    margin-bottom: 3px;
+  }
+  .card-time svg, .card-location svg { opacity: 0.5; flex-shrink: 0; }
+
+  .card-type-badge {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 0.64rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--gold-pale);
+    color: var(--green-deep);
+  }
+  .event-card.type-sisters .card-type-badge   { background: #FCE4EC; color: #C2185B; }
+  .event-card.type-brothers .card-type-badge  { background: #E8F5E9; color: #2E7D32; }
+  .event-card.type-sports .card-type-badge    { background: #E3F2FD; color: #1565C0; }
+  .event-card.type-charity .card-type-badge   { background: #FFF3E0; color: #E65100; }
+  .event-card.type-academic .card-type-badge  { background: #F3E5F5; color: #6A1B9A; }
+  .event-card.type-social .card-type-badge    { background: #E8F5E9; color: #2E7D32; }
+
+  .card-signup {
+    display: block;
+    margin-top: 10px;
+    padding: 7px 0;
+    background: var(--green-deep);
+    color: white;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .card-signup:hover { background: var(--green-light); }
+
+  /* ── Empty state ── */
+  .empty-state {
+    text-align: center;
+    padding: 32px 20px;
+    color: var(--text-mid);
+  }
+  .empty-state .moon { font-size: 2rem; margin-bottom: 10px; }
+  .empty-state p { font-size: 0.85rem; line-height: 1.6; }
+
+  /* ── Loading ── */
+  .spinner {
+    width: 28px; height: 28px;
+    border: 2px solid var(--cream-dark);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 32px auto;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Divider ── */
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 20px 0 0;
+    opacity: 0.4;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .event-card { animation: fadeUp 0.25s ease both; }
+
+  @media (max-width: 600px) {
+    body { padding: 16px 12px 14px; }
+    .widget-title { font-size: 1.2rem; }
+    .date-range { font-size: 0.68rem; margin-bottom: 12px; }
+    .cards-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .event-card {
+      padding: 12px 14px;
+      width: 100% !important;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0 12px;
+      align-items: start;
+    }
+    .event-card::before { display: none; }
+    .card-day {
+      font-size: 0.62rem;
+      grid-column: 1 / -1;
+      margin-bottom: 4px;
+      border-left: 3px solid var(--gold);
+      padding-left: 6px;
+    }
+    .card-name { font-size: 0.85rem; margin-bottom: 4px; }
+    .card-time, .card-location { font-size: 0.72rem; }
+    .card-type-badge { font-size: 0.6rem; padding: 2px 6px; margin-top: 6px; }
+    .card-signup { font-size: 0.72rem; padding: 7px 0; margin-top: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="widget-header">
+  <div class="widget-title">This Week</div>
+  <a class="view-all-link" href="#">View all events ↗</a>
+</div>
+
+<div class="date-range" id="date-range"></div>
+<div id="cards-container"><div class="spinner"></div></div>
+<div class="gold-divider"></div>
+
+<script>
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTBxTrifZz0l8lD_8gFdk6rTNM91liCO_hU5rfolnx-Qbi90flWUcSBaJjqMbfwtlkEQ3iNFUrjJNVB/pub?output=csv';
+
+const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const TYPE_LABELS = {
+  talk:'Talk / Lecture', lecture:'Talk / Lecture', social:'Social',
+  sports:'Sports', sisters:'Sisters Only', brothers:'Brothers Only',
+  charity:'Charity', academic:'Academic'
+};
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  if (lines.length < 2) return [];
+  const headers = lines[0].split(',').map(h => h.replace(/^"|"$/g, '').trim());
+  return lines.slice(1).map(line => {
+    const fields = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      if (line[i] === '"') { inQ = !inQ; }
+      else if (line[i] === ',' && !inQ) { fields.push(cur.trim()); cur = ''; }
+      else { cur += line[i]; }
+    }
+    fields.push(cur.trim());
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = (fields[i] || '').replace(/^"|"$/g, '').trim());
+    return obj;
+  }).filter(r => r.Name && r.Name.length > 0);
+}
+
+function parseDate(str) {
+  if (!str) return null;
+  // Handle M/D/YYYY or MM/DD/YYYY (Google Sheets default)
+  const parts = str.split('/');
+  if (parts.length === 3) {
+    const [m, d, y] = parts;
+    const date = new Date(parseInt(y), parseInt(m) - 1, parseInt(d));
+    if (!isNaN(date)) return date;
+  }
+  // Fallback: YYYY-MM-DD or other formats
+  const d = new Date(str);
+  if (!isNaN(d)) return d;
+  return null;
+}
+
+function getWeekBounds() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const end = new Date(today); end.setDate(today.getDate() + 7);
+  return { today, end };
+}
+
+function buildCard(e, i) {
+  const date = parseDate(e.Date);
+  // Support multiple types e.g. "Social, Sisters" — use first recognised one for styling
+  const types = (e.Type || '').toLowerCase().split(',').map(t => t.trim());
+  const typeKey = types.find(t => TYPE_LABELS[t]) || types[0] || 'event';
+  const typeLabels = types.map(t => TYPE_LABELS[t] || e.Type || 'Event').filter((v,i,a) => a.indexOf(v)===i);
+
+  const dayLabel = date
+    ? `${DAYS[date.getDay()]} ${date.getDate()} ${MONTHS[date.getMonth()]}`
+    : 'Coming up';
+
+  const timeRow = e.Time
+    ? `<div class="card-time">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        ${e.Time}
+      </div>` : '';
+
+  const locRow = e.Location
+    ? `<div class="card-location">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        ${e.Location}
+      </div>` : '';
+
+  const signup = e.FormLink
+    ? `<a class="card-signup" href="${e.FormLink}" target="_blank">Sign Up ↗</a>` : '';
+
+  return `<div class="event-card type-${typeKey}" style="animation-delay:${i*0.06}s">
+    <div class="card-day">${dayLabel}</div>
+    <div class="card-name">${e.Name}</div>
+    ${timeRow}${locRow}
+    ${typeLabels.map(l => `<span class="card-type-badge">${l}</span>`).join(' ')}
+    ${signup}
+  </div>`;
+}
+
+async function init() {
+  const { today, end } = getWeekBounds();
+
+  // Date range label
+  document.getElementById('date-range').textContent =
+    `${DAYS[today.getDay()]} ${today.getDate()} ${MONTHS[today.getMonth()]} – ${DAYS[end.getDay()]} ${end.getDate()} ${MONTHS[end.getMonth()]}`;
+
+  try {
+    const res = await fetch(SHEET_CSV_URL);
+    const text = await res.text();
+    const all = parseCSV(text);
+
+    // Filter to this week + undated events
+    const week = all.filter(e => {
+      const d = parseDate(e.Date);
+      if (!d) return false; // only show dated events in week view
+      return d >= today && d <= end;
+    }).sort((a, b) => parseDate(a.Date) - parseDate(b.Date));
+
+    const container = document.getElementById('cards-container');
+
+    if (week.length === 0) {
+      container.innerHTML = `<div class="empty-state">
+        <div class="moon">🌙</div>
+        <p>No events this week — check back soon insha'Allah.<br>
+        <a href="#" style="color:var(--green-light);font-weight:500">See all upcoming events ↗</a></p>
+      </div>`;
+      return;
+    }
+
+    container.innerHTML = `<div class="cards-row">${week.map((e,i) => buildCard(e,i)).join('')}</div>`;
+
+  } catch(err) {
+    document.getElementById('cards-container').innerHTML = `<div class="empty-state">
+      <p>Could not load events right now.</p>
+    </div>`;
+  }
+}
+
+init();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/iframe-resizer@4.3.9/js/iframeResizer.contentWindow.min.js"></script>
+</body>
+</html>

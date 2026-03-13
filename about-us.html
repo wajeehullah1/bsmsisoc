@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us – BSMS ISOC</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-pale: #FBF5E6;
+    --green-deep: #1A3A2A;
+    --green-mid: #2D5A3D;
+    --green-light: #3D7A52;
+    --cream: #F5F0E8;
+    --cream-dark: #EAE3D2;
+    --text-dark: #1A1A1A;
+    --text-mid: #5A5A5A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+  }
+
+  /* ── Page header ── */
+  .page-header {
+    background: var(--green-deep);
+    padding: 52px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z' fill='none' stroke='%23C9A84C' stroke-width='1'/%3E%3C/svg%3E");
+  }
+  .page-header h1 {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--gold-light);
+    position: relative;
+  }
+  .page-header p {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.9rem;
+    margin-top: 8px;
+    position: relative;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── Main wrap ── */
+  .main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 24px 0;
+  }
+
+  /* ── Section block ── */
+  .committee-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .section-heading {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .section-heading h2 {
+    font-family: 'Amiri', serif;
+    font-size: 1.5rem;
+    color: var(--green-deep);
+    display: inline-block;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  /* ── Cards grid ── */
+  .cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+  .cards-grid .member-card {
+    width: 160px;
+    flex-shrink: 0;
+  }
+
+  /* Head section — larger cards */
+  .cards-grid.head .member-card {
+    width: 220px;
+  }
+
+  /* ── Member card ── */
+  .member-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+    border-bottom: 3px solid var(--cream-dark);
+  }
+  .member-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    border-bottom-color: var(--gold);
+  }
+
+  .member-avatar {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+    background: var(--cream-dark);
+  }
+
+  /* Placeholder avatar */
+  .avatar-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, var(--cream-dark) 0%, #D8D0C0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: rgba(255,255,255,0.6);
+  }
+  .cards-grid.head .avatar-placeholder { font-size: 4rem; }
+
+  .member-info {
+    padding: 12px 10px 14px;
+  }
+  .member-name {
+    font-family: 'Amiri', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .cards-grid.head .member-name { font-size: 1.15rem; }
+
+  .member-role {
+    font-size: 0.75rem;
+    color: var(--text-mid);
+    line-height: 1.4;
+  }
+  .member-gender-tag {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.63rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .tag-brother { background: #E8F5E9; color: #2E7D32; }
+  .tag-sister  { background: #FCE4EC; color: #C2185B; }
+
+  /* ── Loading / error ── */
+  .state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-mid);
+  }
+  .spinner {
+    width: 32px; height: 32px;
+    border: 3px solid var(--cream-dark);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 14px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .member-card {
+    animation: fadeUp 0.3s ease both;
+  }
+
+  .committee-section:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Our Committee</h1>
+  <p>BSMS ISOC is a student-led organisation dedicated to representing, supporting, and connecting our community</p>
+</div>
+
+<div class="main" id="main">
+  <div class="state"><div class="spinner"></div><p>Loading committee…</p></div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// CONFIGURATION — paste your Google Sheet CSV URL here
+// ══════════════════════════════════════════════
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTB6Cs7QMBsxjQ0sbjEvclnZiuf5r_f3F95xjp_QIrPg7CjRGEvyijxE6NDqUpyrnG00pffduykIJRb/pub?output=csv';
+
+// Default avatar SVGs (inline, no external dependency)
+const BROTHER_AVATAR = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23C8D8C0'/%3E%3Ccircle cx='100' cy='75' r='38' fill='%231A3A2A' opacity='0.25'/%3E%3Cellipse cx='100' cy='185' rx='55' ry='40' fill='%231A3A2A' opacity='0.2'/%3E%3C/svg%3E`;
+const SISTER_AVATAR  = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23D0C8D8'/%3E%3Ccircle cx='100' cy='75' r='38' fill='%231A3A2A' opacity='0.25'/%3E%3Cellipse cx='100' cy='185' rx='55' ry='40' fill='%231A3A2A' opacity='0.2'/%3E%3C/svg%3E`;
+
+// Section display order
+const SECTION_ORDER = [
+  'Head',
+  'Core Committee',
+  'Academic Leads',
+  'Clinical Leads',
+  'Tarbiyah Leads',
+  'Tarbiyyah Leads',
+  'Social Leads',
+  'Marketing Reps',
+  'Doctors of Rahman Rep',
+  'Charity Week Reps',
+];
+
+// Fallback hardcoded data — used if sheet URL not yet set
+const FALLBACK_DATA = [
+  { Name:'Izaan Shaikh',          Role:'Head Brother',      Section:'Head',                   Gender:'Brother' },
+  { Name:'Wala Mussa',            Role:'Head Sister',       Section:'Head',                   Gender:'Sister'  },
+  { Name:'Maryam Tahir',          Role:'Treasurer',         Section:'Core Committee',         Gender:'Sister'  },
+  { Name:'Sara',                  Role:'Secretary',         Section:'Core Committee',         Gender:'Sister'  },
+  { Name:'Daniyal Thakur',        Role:'Ummah Affairs (Welfare)', Section:'Core Committee',   Gender:'Brother' },
+  { Name:'Ali Al Jawaad',         Role:'Brothers',          Section:'Academic Leads',         Gender:'Brother' },
+  { Name:'Rabeeta Gill',          Role:'Sisters',           Section:'Academic Leads',         Gender:'Sister'  },
+  { Name:'Wajeeh Ullah Mahmood',  Role:'Brothers',          Section:'Clinical Leads',         Gender:'Brother' },
+  { Name:'Noran Twati',           Role:'Sisters',           Section:'Clinical Leads',         Gender:'Sister'  },
+  { Name:'Junayd Soobratty',      Role:'Brothers',          Section:'Tarbiyah Leads',         Gender:'Brother' },
+  { Name:'Rezarta Beka',          Role:'Sisters',           Section:'Tarbiyah Leads',         Gender:'Sister'  },
+  { Name:'Al Aqeel Mirzan',       Role:'Brothers',          Section:'Social Leads',           Gender:'Brother' },
+  { Name:'Faaizah Ahmad',         Role:'Sisters',           Section:'Social Leads',           Gender:'Sister'  },
+  { Name:'Shearyaar Hussain',     Role:'Brothers',          Section:'Marketing Reps',         Gender:'Brother' },
+  { Name:'Nazia Ali',             Role:'Sisters',           Section:'Marketing Reps',         Gender:'Sister'  },
+  { Name:'Moadh Hwessa',          Role:'Rep',               Section:'Doctors of Rahman Rep',  Gender:'Brother' },
+  { Name:'Sajeda Sufizada',       Role:'Lead',              Section:'Charity Week Reps',      Gender:'Sister'  },
+  { Name:'Shimaq Sakeel Mohamed', Role:'Treasurer',         Section:'Charity Week Reps',      Gender:'Brother' },
+  { Name:'Noor Bhatti',           Role:'Secretary',         Section:'Charity Week Reps',      Gender:'Sister'  },
+  { Name:'Rubeen Ahmad',          Role:'Coordinator',       Section:'Charity Week Reps',      Gender:'Brother' },
+];
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  if (lines.length < 2) return [];
+  const headers = lines[0].split(',').map(h => h.replace(/^"|"$/g, '').trim());
+  return lines.slice(1).map(line => {
+    const fields = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      if (line[i] === '"') { inQ = !inQ; }
+      else if (line[i] === ',' && !inQ) { fields.push(cur.trim()); cur = ''; }
+      else { cur += line[i]; }
+    }
+    fields.push(cur.trim());
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = (fields[i] || '').replace(/^"|"$/g, '').trim());
+    return obj;
+  }).filter(r => r.Name && r.Name.length > 0);
+}
+
+function normaliseDriveUrl(url) {
+  if (!url) return null;
+  // Handle /file/d/FILE_ID/view format
+  const fileMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (fileMatch) return `https://drive.google.com/thumbnail?id=${fileMatch[1]}&sz=w400`;
+  // Handle ?id=FILE_ID format (already thumbnail style)
+  const idMatch = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  if (idMatch) return `https://drive.google.com/thumbnail?id=${idMatch[1]}&sz=w400`;
+  // Return as-is if neither pattern matches
+  return url;
+}
+
+function buildCard(member, i) {
+  const isSister = (member.Gender || '').toLowerCase().includes('sister');
+  const rawUrl = member.AvatarURL ? normaliseDriveUrl(member.AvatarURL) : null;
+  const avatarSrc = rawUrl || (isSister ? SISTER_AVATAR : BROTHER_AVATAR);
+  const tagClass  = isSister ? 'tag-sister' : 'tag-brother';
+  const tagLabel  = isSister ? 'Sister' : 'Brother';
+  const delay     = Math.min(i * 0.04, 0.4);
+
+  return `<div class="member-card" style="animation-delay:${delay}s">
+    <img class="member-avatar" src="${avatarSrc}" alt="${member.Name}"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="avatar-placeholder" style="display:none">${isSister ? '🧕' : '🧔'}</div>
+    <div class="member-info">
+      <div class="member-name">${member.Name}</div>
+      ${member.Role ? `<div class="member-role">${member.Role}</div>` : ''}
+      <span class="member-gender-tag ${tagClass}">${tagLabel}</span>
+    </div>
+  </div>`;
+}
+
+function render(data) {
+  // Group by section
+  const sections = {};
+  data.forEach(m => {
+    const sec = m.Section || 'Other';
+    if (!sections[sec]) sections[sec] = [];
+    sections[sec].push(m);
+  });
+
+  // Build ordered list of sections
+  const orderedSections = [
+    ...SECTION_ORDER.filter(s => sections[s]),
+    ...Object.keys(sections).filter(s => !SECTION_ORDER.includes(s))
+  ];
+
+  const main = document.getElementById('main');
+  main.innerHTML = orderedSections.map(secName => {
+    const members = sections[secName];
+    const isHead  = secName === 'Head';
+    const cards   = members.map((m, i) => buildCard(m, i)).join('');
+    return `<div class="committee-section">
+      <div class="section-heading"><h2>${secName}</h2></div>
+      <div class="cards-grid${isHead ? ' head' : ''}">${cards}</div>
+    </div>`;
+  }).join('');
+}
+
+async function init() {
+  if (false) {
+    render(FALLBACK_DATA);
+    return;
+  }
+  try {
+    const res  = await fetch(SHEET_CSV_URL);
+    const text = await res.text();
+    const data = parseCSV(text);
+    render(data.length ? data : FALLBACK_DATA);
+  } catch(e) {
+    render(FALLBACK_DATA);
+  }
+}
+
+init();
+</script>
+
+<script>
+  function notifyHeight() {
+    const h = document.body.scrollHeight;
+    window.parent.postMessage({ type: 'resize', height: h }, '*');
+  }
+  // Notify on load and whenever content changes
+  window.addEventListener('load', notifyHeight);
+  const observer = new MutationObserver(notifyHeight);
+  observer.observe(document.body, { childList: true, subtree: true });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/iframe-resizer@4.3.9/js/iframeResizer.contentWindow.min.js"></script>
+</body>
+</html>

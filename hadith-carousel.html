@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hadith Carousel – BSMS ISOC</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --green-deep: #1A3A2A;
+    --green-mid: #2D5A3D;
+    --green-light: #3D7A52;
+    --cream: #F5F0E8;
+    --cream-dark: #EAE3D2;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; width: 100%; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+  }
+
+  /* ── Section wrapper ── */
+  .hadith-section {
+    background: var(--green-deep);
+    padding: 56px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Geometric background pattern */
+  .hadith-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40 Z' fill='none' stroke='%23C9A84C' stroke-width='1'/%3E%3Cpath d='M40 15 L65 40 L40 65 L15 40 Z' fill='none' stroke='%23C9A84C' stroke-width='1'/%3E%3Cpath d='M40 28 L52 40 L40 52 L28 40 Z' fill='none' stroke='%23C9A84C' stroke-width='1'/%3E%3C/svg%3E");
+  }
+
+  /* Radial glow */
+  .hadith-section::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* ── Section header ── */
+  .section-label {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-label .eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .section-label h2 {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: var(--cream);
+    line-height: 1.2;
+  }
+
+  .section-label .arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    color: rgba(232,201,122,0.55);
+    margin-top: 4px;
+  }
+
+  .gold-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .gold-divider span {
+    height: 1px;
+    width: 60px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+
+  .gold-divider span:last-child {
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .gold-divider .diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* ── Carousel ── */
+  .carousel-outer {
+    position: relative;
+    max-width: 820px;
+    margin: 0 auto;
+    z-index: 1;
+  }
+
+  .carousel-track-wrap {
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.18, 1);
+    will-change: transform;
+  }
+
+  /* ── Hadith card ── */
+  .hadith-card {
+    min-width: 100%;
+    padding: 48px 52px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    position: relative;
+  }
+
+  .quote-mark {
+    font-family: 'Amiri', serif;
+    font-size: 5rem;
+    line-height: 0.5;
+    color: rgba(201,168,76,0.2);
+    position: absolute;
+    top: 28px;
+    left: 36px;
+    user-select: none;
+  }
+
+  .hadith-arabic {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    color: var(--gold-light);
+    line-height: 1.8;
+    direction: rtl;
+    max-width: 640px;
+  }
+
+  .hadith-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(201,168,76,0.35);
+  }
+
+  .hadith-text {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    color: rgba(245,240,232,0.88);
+    line-height: 1.75;
+    font-style: italic;
+    max-width: 640px;
+    font-weight: 300;
+  }
+
+  .hadith-source {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 4px;
+  }
+
+  /* ── Nav arrows ── */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold-light);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 2;
+  }
+
+  .carousel-btn:hover {
+    background: rgba(201,168,76,0.25);
+    border-color: var(--gold);
+  }
+
+  .carousel-btn.prev { left: -56px; }
+  .carousel-btn.next { right: -56px; }
+
+  /* ── Dots ── */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.25);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    padding: 0;
+  }
+
+  .dot.active {
+    background: var(--gold);
+    width: 22px;
+    border-radius: 3px;
+  }
+
+  /* ── Progress bar ── */
+  .progress-bar {
+    height: 2px;
+    background: rgba(201,168,76,0.12);
+    border-radius: 2px;
+    margin-top: 20px;
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    transition: width 0.1s linear;
+  }
+
+  @media (max-width: 640px) {
+    .hadith-section { padding: 20px 12px 24px; }
+    /* Collapse header on mobile to save space */
+    .section-label { margin-bottom: 16px; }
+    .section-label .eyebrow { font-size: 0.65rem; }
+    .section-label h2 { font-size: 1.2rem; }
+    .section-label .arabic { font-size: 0.9rem; }
+    .gold-divider { margin: 8px auto; }
+    /* Compact card */
+    .hadith-card { padding: 20px 14px; gap: 10px; }
+    .hadith-arabic { font-size: 1.1rem; line-height: 1.65; }
+    .hadith-text { font-size: 0.83rem; line-height: 1.6; }
+    .hadith-source { font-size: 0.68rem; }
+    /* Move arrows inside card sides */
+    .carousel-btn { width: 30px; height: 30px; font-size: 0.8rem; top: auto; bottom: -16px; transform: none; }
+    .carousel-btn.prev { left: calc(50% - 40px); }
+    .carousel-btn.next { right: calc(50% - 40px); }
+    .quote-mark { display: none; }
+    .dots { margin-top: 28px; gap: 6px; }
+    .dot { width: 6px; height: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hadith-section">
+
+  <div class="section-label">
+    <p class="eyebrow">Words of the Prophet ﷺ</p>
+    <h2>Hadith of the Day</h2>
+    <p class="arabic">أحاديث نبوية</p>
+    <div class="gold-divider">
+      <span></span><div class="diamond"></div><span></span>
+    </div>
+  </div>
+
+  <div class="carousel-outer">
+    <button class="carousel-btn prev" aria-label="Previous">&#8592;</button>
+    <button class="carousel-btn next" aria-label="Next">&#8594;</button>
+
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="track"></div>
+    </div>
+  </div>
+
+  <div class="carousel-dots" id="dots"></div>
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+</section>
+
+<script>
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR4lLkQEHC_s2OdYYi-Tpwwg5ZO--kf3oM26LrBrp9eARrv6T2XovmF1QmdSLsEs2Z096ziL26mJqKy/pub?output=csv';
+const INTERVAL = 6000;
+let current = 0;
+let timer, progressTimer, progressStart;
+let hadiths = [];
+
+const track    = document.getElementById('track');
+const dotsEl   = document.getElementById('dots');
+const progressEl = document.getElementById('progress');
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+  return lines.slice(1).map(line => {
+    const vals = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') { inQ = !inQ; }
+      else if (ch === ',' && !inQ) { vals.push(cur); cur = ''; }
+      else { cur += ch; }
+    }
+    vals.push(cur);
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = (vals[i] || '').replace(/^"|"$/g, '').trim());
+    return obj;
+  }).filter(r => r.Arabic || r.Text);
+}
+
+function buildCarousel(data) {
+  hadiths = data;
+  track.innerHTML = '';
+  dotsEl.innerHTML = '';
+
+  hadiths.forEach(h => {
+    const card = document.createElement('div');
+    card.className = 'hadith-card';
+    card.innerHTML = `
+      <div class="quote-mark">"</div>
+      <p class="hadith-arabic">${h.Arabic || ''}</p>
+      <div class="hadith-divider"></div>
+      <p class="hadith-text">"${h.Text || ''}"</p>
+      <p class="hadith-source">${h.Source || ''}</p>
+    `;
+    track.appendChild(card);
+  });
+
+  hadiths.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(dot);
+  });
+
+  goTo(0);
+  startAuto();
+}
+
+function goTo(idx) {
+  current = (idx + hadiths.length) % hadiths.length;
+  track.style.transform = `translateX(-${current * 100}%)`;
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  resetProgress();
+}
+
+function resetProgress() {
+  clearInterval(progressTimer);
+  progressEl.style.width = '0%';
+  progressStart = Date.now();
+  progressTimer = setInterval(() => {
+    const pct = Math.min(((Date.now() - progressStart) / INTERVAL) * 100, 100);
+    progressEl.style.width = pct + '%';
+  }, 50);
+}
+
+function startAuto() {
+  clearInterval(timer);
+  timer = setInterval(() => goTo(current + 1), INTERVAL);
+}
+
+document.querySelector('.prev').addEventListener('click', () => { goTo(current - 1); clearInterval(timer); startAuto(); });
+document.querySelector('.next').addEventListener('click', () => { goTo(current + 1); clearInterval(timer); startAuto(); });
+
+const outer = document.querySelector('.carousel-outer');
+outer.addEventListener('mouseenter', () => { clearInterval(timer); clearInterval(progressTimer); });
+outer.addEventListener('mouseleave', () => { startAuto(); resetProgress(); });
+
+let touchStartX = 0;
+track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+track.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 40) { goTo(current + (diff > 0 ? 1 : -1)); clearInterval(timer); startAuto(); }
+});
+
+// Load from sheet
+fetch(SHEET_URL)
+  .then(r => r.text())
+  .then(text => buildCarousel(parseCSV(text)))
+  .catch(() => {
+    // Fallback: show a single card if sheet fails
+    track.innerHTML = '<div class="hadith-card"><p class="hadith-text">Could not load hadiths. Please check your internet connection.</p></div>';
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/iframe-resizer@4.3.9/js/iframeResizer.contentWindow.min.js"></script>
+</body>
+</html>
