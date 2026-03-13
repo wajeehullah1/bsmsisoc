@@ -1,0 +1,400 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.3">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1">&lt;title&gt;Week Ahead – BSMS ISOC&lt;/title&gt;</p>
+<p class="p1">&lt;link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=Outfit:wght@300;400;500;600&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--gold: #C9A84C;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--gold-light: #E8C97A;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--gold-pale: #FBF5E6;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--green-deep: #1A3A2A;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--green-mid: #2D5A3D;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--green-light: #3D7A52;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--cream: #FDFAF4;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--cream-dark: #EEE8D8;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--text-dark: #1A1A1A;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--text-mid: #5A5A5A;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>* { box-sizing: border-box; margin: 0; padding: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>html, body { overflow-x: hidden; width: 100%; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Outfit', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--cream);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-dark);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 28px 20px 24px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── Header ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.widget-header {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: baseline;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.widget-title {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Amiri', serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 1.6rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--green-deep);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.widget-title::before {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>content: '';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: inline-block;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 1.4rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--gold);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 2px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.view-all-link {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.78rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--green-light);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-decoration: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.02em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-bottom: 1px solid var(--cream-dark);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding-bottom: 1px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: color 0.15s, border-color 0.15s;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.view-all-link:hover { color: var(--gold); border-color: var(--gold); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── Date range label ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.date-range {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-mid);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.04em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── Cards row ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.cards-row {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── Event card ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 14px 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1.5px solid var(--cream-dark);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cursor: default;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card:hover {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transform: translateY(-2px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 0 6px 18px rgba(201,168,76,0.12);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-color: var(--gold);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Gold top stripe by type */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card::before {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>content: '';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>top: 0; left: 0; right: 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 10px 10px 0 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--gold);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card.type-sisters::before <span class="Apple-converted-space">  </span>{ background: #D4618A; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card.type-brothers::before<span class="Apple-converted-space">  </span>{ background: var(--green-mid); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card.type-sports::before<span class="Apple-converted-space">    </span>{ background: #3B6CB7; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card.type-charity::before <span class="Apple-converted-space">  </span>{ background: #C87420; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card.type-academic::before<span class="Apple-converted-space">  </span>{ background: #7B4FA6; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card.type-social::before<span class="Apple-converted-space">    </span>{ background: var(--green-light); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card-day {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.68rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.08em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--gold);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card-name {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.88rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--green-deep);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.3;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card-time, .card-location {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.74rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-mid);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card-time svg, .card-location svg { opacity: 0.5; flex-shrink: 0; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card-type-badge {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: inline-block;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 3px 8px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.64rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.05em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--gold-pale);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--green-deep);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card.type-sisters .card-type-badge <span class="Apple-converted-space">  </span>{ background: #FCE4EC; color: #C2185B; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card.type-brothers .card-type-badge<span class="Apple-converted-space">  </span>{ background: #E8F5E9; color: #2E7D32; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card.type-sports .card-type-badge<span class="Apple-converted-space">    </span>{ background: #E3F2FD; color: #1565C0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card.type-charity .card-type-badge <span class="Apple-converted-space">  </span>{ background: #FFF3E0; color: #E65100; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card.type-academic .card-type-badge<span class="Apple-converted-space">  </span>{ background: #F3E5F5; color: #6A1B9A; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card.type-social .card-type-badge<span class="Apple-converted-space">    </span>{ background: #E8F5E9; color: #2E7D32; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card-signup {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 7px 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--green-deep);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.72rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-decoration: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: background 0.15s;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card-signup:hover { background: var(--green-light); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── Empty state ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.empty-state {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 32px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-mid);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.empty-state .moon { font-size: 2rem; margin-bottom: 10px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.empty-state p { font-size: 0.85rem; line-height: 1.6; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── Loading ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.spinner {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width: 28px; height: 28px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 2px solid var(--cream-dark);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-top-color: var(--gold);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>animation: spin 0.8s linear infinite;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin: 32px auto;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>@keyframes spin { to { transform: rotate(360deg); } }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── Divider ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.gold-divider {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 1px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: linear-gradient(to right, transparent, var(--gold), transparent);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin: 20px 0 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opacity: 0.4;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>@keyframes fadeUp {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>from { opacity: 0; transform: translateY(6px); }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>to <span class="Apple-converted-space">  </span>{ opacity: 1; transform: translateY(0); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.event-card { animation: fadeUp 0.25s ease both; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>@media (max-width: 600px) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body { padding: 16px 12px 14px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.widget-title { font-size: 1.2rem; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.date-range { font-size: 0.68rem; margin-bottom: 12px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.cards-row {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.event-card {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px 14px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100% !important;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: auto 1fr;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 0 12px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: start;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.event-card::before { display: none; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card-day {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.62rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>grid-column: 1 / -1;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-left: 3px solid var(--gold);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding-left: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card-name { font-size: 0.85rem; margin-bottom: 4px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card-time, .card-location { font-size: 0.72rem; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card-type-badge { font-size: 0.6rem; padding: 2px 6px; margin-top: 6px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card-signup { font-size: 0.72rem; padding: 7px 0; margin-top: 8px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="widget-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="widget-title"&gt;This Week&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;a class="view-all-link" href="#"&gt;View all events ↗&lt;/a&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="date-range" id="date-range"&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;div id="cards-container"&gt;&lt;div class="spinner"&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;div class="gold-divider"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTBxTrifZz0l8lD_8gFdk6rTNM91liCO_hU5rfolnx-Qbi90flWUcSBaJjqMbfwtlkEQ3iNFUrjJNVB/pub?output=csv';</p>
+<p class="p2"><br></p>
+<p class="p1">const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];</p>
+<p class="p1">const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];</p>
+<p class="p1">const TYPE_LABELS = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>talk:'Talk / Lecture', lecture:'Talk / Lecture', social:'Social',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>sports:'Sports', sisters:'Sisters Only', brothers:'Brothers Only',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>charity:'Charity', academic:'Academic'</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">function parseCSV(text) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const lines = text.trim().split('\n');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (lines.length &lt; 2) return [];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const headers = lines[0].split(',').map(h =&gt; h.replace(/^"|"$/g, '').trim());</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return lines.slice(1).map(line =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const fields = [];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let cur = '', inQ = false;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>for (let i = 0; i &lt; line.length; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (line[i] === '"') { inQ = !inQ; }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>else if (line[i] === ',' &amp;&amp; !inQ) { fields.push(cur.trim()); cur = ''; }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>else { cur += line[i]; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fields.push(cur.trim());</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const obj = {};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>headers.forEach((h, i) =&gt; obj[h] = (fields[i] || '').replace(/^"|"$/g, '').trim());</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return obj;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}).filter(r =&gt; r.Name &amp;&amp; r.Name.length &gt; 0);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function parseDate(str) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!str) return null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Handle M/D/YYYY or MM/DD/YYYY (Google Sheets default)</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const parts = str.split('/');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (parts.length === 3) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const [m, d, y] = parts;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const date = new Date(parseInt(y), parseInt(m) - 1, parseInt(d));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (!isNaN(date)) return date;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Fallback: YYYY-MM-DD or other formats</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const d = new Date(str);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!isNaN(d)) return d;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return null;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function getWeekBounds() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const today = new Date(); today.setHours(0,0,0,0);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const end = new Date(today); end.setDate(today.getDate() + 7);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return { today, end };</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function buildCard(e, i) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const date = parseDate(e.Date);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Support multiple types e.g. "Social, Sisters" — use first recognised one for styling</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const types = (e.Type || '').toLowerCase().split(',').map(t =&gt; t.trim());</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const typeKey = types.find(t =&gt; TYPE_LABELS[t]) || types[0] || 'event';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const typeLabels = types.map(t =&gt; TYPE_LABELS[t] || e.Type || 'Event').filter((v,i,a) =&gt; a.indexOf(v)===i);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const dayLabel = date</p>
+<p class="p1"><span class="Apple-converted-space">    </span>? `${DAYS[date.getDay()]} ${date.getDate()} ${MONTHS[date.getMonth()]}`</p>
+<p class="p1"><span class="Apple-converted-space">    </span>: 'Coming up';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const timeRow = e.Time</p>
+<p class="p1"><span class="Apple-converted-space">    </span>? `&lt;div class="card-time"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;circle cx="12" cy="12" r="10"/&gt;&lt;path d="M12 6v6l4 2"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>${e.Time}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;` : '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const locRow = e.Location</p>
+<p class="p1"><span class="Apple-converted-space">    </span>? `&lt;div class="card-location"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/&gt;&lt;circle cx="12" cy="10" r="3"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>${e.Location}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;` : '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const signup = e.FormLink</p>
+<p class="p1"><span class="Apple-converted-space">    </span>? `&lt;a class="card-signup" href="${e.FormLink}" target="_blank"&gt;Sign Up ↗&lt;/a&gt;` : '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return `&lt;div class="event-card type-${typeKey}" style="animation-delay:${i*0.06}s"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card-day"&gt;${dayLabel}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card-name"&gt;${e.Name}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>${timeRow}${locRow}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>${typeLabels.map(l =&gt; `&lt;span class="card-type-badge"&gt;${l}&lt;/span&gt;`).join(' ')}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>${signup}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;`;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">async function init() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const { today, end } = getWeekBounds();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Date range label</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('date-range').textContent =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>`${DAYS[today.getDay()]} ${today.getDate()} ${MONTHS[today.getMonth()]} – ${DAYS[end.getDay()]} ${end.getDate()} ${MONTHS[end.getMonth()]}`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const res = await fetch(SHEET_CSV_URL);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const text = await res.text();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const all = parseCSV(text);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Filter to this week + undated events</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const week = all.filter(e =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const d = parseDate(e.Date);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!d) return false; // only show dated events in week view</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return d &gt;= today &amp;&amp; d &lt;= end;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}).sort((a, b) =&gt; parseDate(a.Date) - parseDate(b.Date));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const container = document.getElementById('cards-container');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (week.length === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>container.innerHTML = `&lt;div class="empty-state"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="moon"&gt;🌙&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;No events this week — check back soon insha'Allah.&lt;br&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#" style="color:var(--green-light);font-weight:500"&gt;See all upcoming events ↗&lt;/a&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>container.innerHTML = `&lt;div class="cards-row"&gt;${week.map((e,i) =&gt; buildCard(e,i)).join('')}&lt;/div&gt;`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>} catch(err) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('cards-container').innerHTML = `&lt;div class="empty-state"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Could not load events right now.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">init();</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.9/iframeResizer.contentWindow.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
